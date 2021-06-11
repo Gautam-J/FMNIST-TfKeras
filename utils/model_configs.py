@@ -1,7 +1,9 @@
+import kerastuner as kt
 from tensorflow.keras import Sequential
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
 from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense
+from tensorflow.keras.callbacks import TensorBoard
 
 
 def build_initial_hyper_model(hp):
@@ -65,3 +67,31 @@ def build_train_model():
     model.compile(loss=loss_obj, optimizer=opt, metrics=['accuracy'])
 
     return model
+
+
+def get_tensorboard(log_dir, fine_tuning=False):
+    if fine_tuning:
+        return TensorBoard(log_dir=f'./logs/hparam_val/{log_dir}')
+
+    return TensorBoard(log_dir=f'./logs/hparam_train/{log_dir}')
+
+
+def get_tuner(log_dir, max_epochs, fine_tuning=False):
+    if fine_tuning:
+        return kt.Hyperband(
+            build_fine_hyper_model,
+            objective='val_accuracy',
+            max_epochs=max_epochs,
+            executions_per_trial=1,
+            directory=f'logs/hparam_val/run_{log_dir}',
+            project_name='fmnist'
+        )
+
+    return kt.Hyperband(
+        build_initial_hyper_model,
+        objective='accuracy',
+        max_epochs=max_epochs,
+        executions_per_trial=1,
+        directory=f'logs/hparam_train/run_{log_dir}',
+        project_name='fmnist'
+    )
