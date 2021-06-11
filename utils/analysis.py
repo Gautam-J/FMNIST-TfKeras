@@ -148,3 +148,28 @@ def _get_y_pred(model, x):
         y_pred = np.argmax(y_pred, axis=-1)
 
     return y_pred
+
+
+def get_class_labels():
+    """Returns a list of class labels for the FMNIST dataset.
+
+    Returns
+    -------
+    class_labels : list[str]
+        The labels for FMNIST dataset.
+    """
+
+    class_labels = [
+        'T-shirt',
+        'Trouser',
+        'Pullover',
+        'Dress',
+        'Coat',
+        'Sandal',
+        'Shirt',
+        'Sneaker',
+        'Bag',
+        'Ankle Boot'
+    ]
+
+    return class_labels

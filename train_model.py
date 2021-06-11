@@ -5,7 +5,12 @@ from tensorflow.keras.datasets import fashion_mnist
 from tensorflow.keras.callbacks import TensorBoard
 
 from utils.model_configs import build_train_model
-from utils.analysis import setup_logger, get_error_pct, get_f1_score
+from utils.analysis import (
+    setup_logger,
+    get_error_pct,
+    get_f1_score,
+    get_class_labels
+)
 from utils.data import (
     split_data,
     get_dataset,
@@ -97,18 +102,7 @@ if not os.path.exists(f'models/{LOG_DIR}'):
     logger.info(f'Created ./models/{LOG_DIR}')
 
 y_pred = np.argmax(model.predict(x_test), axis=-1).reshape(-1, 1)
-class_labels = [
-    'T-shirt',
-    'Trouser',
-    'Pullover',
-    'Dress',
-    'Coat',
-    'Sandal',
-    'Shirt',
-    'Sneaker',
-    'Bag',
-    'Ankle Boot'
-]
+class_labels = get_class_labels()
 
 save_classification_report(y_test, y_pred, class_labels,
                            directory=f'./models/{LOG_DIR}')
