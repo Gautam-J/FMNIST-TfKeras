@@ -1,18 +1,18 @@
-2021-06-11 12:18:35 INFO     ==================================================
-2021-06-11 12:18:35 INFO     RNG seed set
-2021-06-11 12:18:38 INFO     Number of train examples: 47500
-2021-06-11 12:18:38 INFO     Number of validation examples: 2500
-2021-06-11 12:18:38 INFO     Number of test examples: 10000
-2021-06-11 12:18:38 DEBUG    x_train.shape = (47500, 32, 32, 3)
-2021-06-11 12:18:38 DEBUG    y_train.shape = (47500, 1)
-2021-06-11 12:18:38 DEBUG    x_val.shape = (2500, 32, 32, 3)
-2021-06-11 12:18:38 DEBUG    y_val.shape = (2500, 1)
-2021-06-11 12:18:38 DEBUG    x_test.shape = (10000, 32, 32, 3)
-2021-06-11 12:18:38 DEBUG    y_test.shape = (10000, 1)
-2021-06-11 12:18:38 CRITICAL dummy_train_f1_score = 0.0182
-2021-06-11 12:18:38 CRITICAL dummy_val_f1_score = 0.0182
-2021-06-11 12:18:38 CRITICAL dummy_test_f1_score = 0.0182
-2021-06-11 12:18:38 CRITICAL dummy_train_error_pct = 90.0000 %
-2021-06-11 12:18:38 CRITICAL dummy_val_error_pct = 90.0000 %
-2021-06-11 12:18:38 CRITICAL dummy_test_error_pct = 90.0000 %
-2021-06-11 12:18:38 INFO     ==================================================
+2021-06-11 12:38:54 INFO     ==================================================
+2021-06-11 12:38:54 INFO     RNG seed set
+2021-06-11 12:38:55 INFO     Number of train examples: 58000
+2021-06-11 12:38:55 INFO     Number of validation examples: 2000
+2021-06-11 12:38:55 INFO     Number of test examples: 10000
+2021-06-11 12:38:55 DEBUG    x_train.shape = (58000, 28, 28, 1)
+2021-06-11 12:38:55 DEBUG    y_train.shape = (58000, 1)
+2021-06-11 12:38:55 DEBUG    x_val.shape = (2000, 28, 28, 1)
+2021-06-11 12:38:55 DEBUG    y_val.shape = (2000, 1)
+2021-06-11 12:38:55 DEBUG    x_test.shape = (10000, 28, 28, 1)
+2021-06-11 12:38:55 DEBUG    y_test.shape = (10000, 1)
+2021-06-11 12:38:55 CRITICAL dummy_train_f1_score = 0.0182
+2021-06-11 12:38:55 CRITICAL dummy_val_f1_score = 0.0182
+2021-06-11 12:38:55 CRITICAL dummy_test_f1_score = 0.0182
+2021-06-11 12:38:55 CRITICAL dummy_train_error_pct = 90.0000 %
+2021-06-11 12:38:55 CRITICAL dummy_val_error_pct = 90.0000 %
+2021-06-11 12:38:55 CRITICAL dummy_test_error_pct = 90.0000 %
+2021-06-11 12:38:55 INFO     ==================================================

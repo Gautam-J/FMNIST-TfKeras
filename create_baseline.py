@@ -1,5 +1,5 @@
 from sklearn.dummy import DummyClassifier
-from tensorflow.keras.datasets import cifar10
+from tensorflow.keras.datasets import fashion_mnist
 
 from utils.data import set_random_seed, split_data, normalize_image
 from utils.analysis import setup_logger, get_error_pct, get_f1_score
@@ -10,12 +10,17 @@ logger.info('=' * 50)
 set_random_seed()
 logger.info("RNG seed set")
 
-(x, y), (x_test, y_test) = cifar10.load_data()
+(x, y), (x_test, y_test) = fashion_mnist.load_data()
+
+x = x.reshape(*x.shape, 1)
+y = y.reshape(*y.shape, 1)
+x_test = x_test.reshape(*x_test.shape, 1)
+y_test = y_test.reshape(*y_test.shape, 1)
 
 x = normalize_image(x)
 x_test = normalize_image(x_test)
 
-x_train, x_val, y_train, y_val = split_data(x, y, split_size=0.05)
+x_train, x_val, y_train, y_val = split_data(x, y, split_size=2000)
 
 logger.info(f'Number of train examples: {y_train.shape[0]}')
 logger.info(f'Number of validation examples: {y_val.shape[0]}')
