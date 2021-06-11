@@ -23,14 +23,14 @@ from utils.visualizations import (
     plot_tf_model
 )
 
-logger = setup_logger('stdoutLogger', log_file='logs/trainlogs.txt')
+logger = setup_logger('train_logger', log_file='logs/trainlogs.txt')
 logger.info('=' * 50)
 
 set_random_seed()
 logger.info("RNG seed set")
 
 EPOCHS = 2
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 logger.critical(f'{EPOCHS = }')
 logger.critical(f'{BATCH_SIZE = }')
 

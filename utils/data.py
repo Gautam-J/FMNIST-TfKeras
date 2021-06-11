@@ -29,14 +29,14 @@ def get_dataset(x, y, batch_size=32, shuffle_size=1024, test=False):
 
     Notes
     -----
-    If `test=True`, the dataset is returned without any batch split, shuffling,
-    caching and prefetching.
+    If `test=True`, the dataset is returned without any shuffling,
+    batch splitting, caching and prefetching.
     """
 
     dataset = Dataset.from_tensor_slices((x, y))
 
     if not test:
-        dataset = dataset.batch(batch_size).shuffle(shuffle_size)
+        dataset = dataset.shuffle(shuffle_size).batch(batch_size)
         dataset = dataset.cache().prefetch(AUTOTUNE)
 
     return dataset

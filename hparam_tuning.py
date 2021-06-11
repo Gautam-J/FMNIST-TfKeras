@@ -26,7 +26,7 @@ logger.info('=' * 50)
 set_random_seed()
 logger.info("RNG seed set")
 
-MAX_EPOCHS = 3
+MAX_EPOCHS = 30
 BATCH_SIZE = 32
 FINE_TUNING = args.fine
 logger.critical(f'{MAX_EPOCHS = }')
