@@ -47,7 +47,7 @@ def build_train_model():
     model = Sequential(name='train_model')
 
     model.add(Conv2D(8, (3, 3), padding='same', activation='relu',
-                     name='conv1', input_shape=(32, 32, 3)))
+                     name='conv1', input_shape=(28, 28, 1)))
     model.add(MaxPool2D(2, name='maxpool1'))
 
     model.add(Conv2D(16, (3, 3), padding='same', activation='relu',
