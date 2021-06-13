@@ -2,55 +2,41 @@ import kerastuner as kt
 from tensorflow.keras import Sequential
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
-from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense, Activation
-from tensorflow.keras.layers import GlobalAveragePooling2D, BatchNormalization
+from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense
+from tensorflow.keras.layers import Activation, BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard
 
 
 def build_initial_hyper_model(hp):
     model = Sequential(name='initial_hyper_model')
 
-    act_func = hp.Choice('activation', ['relu', 'elu'])
-
-    model.add(Conv2D(hp.Int('conv_units1', 8, 256, 32), 3, padding='same',
+    model.add(Conv2D(hp.Int('conv_units1', 32, 256, 32), 3, padding='same',
                      input_shape=(28, 28, 1), use_bias=False, name='conv1'))
     model.add(BatchNormalization(axis=-1, name='conv1_bn'))
-    model.add(Activation(act_func))
+    model.add(Activation('relu'))
 
     model.add(MaxPool2D(2, name='maxpool1'))
 
     model.add(Conv2D(hp.Int('conv_units2', 32, 256, 32), 3, padding='same',
                      use_bias=False, name='conv2'))
     model.add(BatchNormalization(axis=-1, name='conv2_bn'))
-    model.add(Activation(act_func))
+    model.add(Activation('relu'))
 
     model.add(MaxPool2D(2, name='maxpool2'))
 
-    model.add(Conv2D(hp.Int('conv_units3', 64, 256, 32), 3, padding='same',
+    model.add(Conv2D(hp.Int('conv_units3', 32, 256, 32), 3, padding='same',
                      use_bias=False, name='conv3'))
     model.add(BatchNormalization(axis=-1, name='conv3_bn'))
-    model.add(Activation(act_func))
+    model.add(Activation('relu'))
 
     model.add(MaxPool2D(2, name='maxpool3'))
 
-    dense = hp.Boolean('dense')
-    if dense:
-        model.add(Flatten(name='flatten'))
-        n_layers = hp.Choice('ndense_layers', [1, 2, 3])
+    model.add(Flatten(name='flatten'))
 
-        for i in range(n_layers):
-            model.add(Dense(hp.Int(f'dense_units{i + 1}', 128, 512, 64),
-                            use_bias=False, name=f'dense{i + 1}'))
-            model.add(BatchNormalization(axis=-1, name=f'dense{i + 1}_bn'))
-            model.add(Activation(act_func))
-
-    else:
-        model.add(Conv2D(128, 1, use_bias=False, padding='same',
-                         name='conv4'))
-        model.add(BatchNormalization(axis=-1, name='conv4_bn'))
-        model.add(Activation(act_func))
-
-        model.add(GlobalAveragePooling2D(name='global_avg_pooling'))
+    model.add(Dense(hp.Int('dense_units1', 128, 1024, 64),
+                    use_bias=False, name='dense1'))
+    model.add(BatchNormalization(axis=-1, name='dense1_bn'))
+    model.add(Activation('relu'))
 
     model.add(Dense(10, activation='linear', name='output'))
 

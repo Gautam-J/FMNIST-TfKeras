@@ -20,14 +20,14 @@ parser.add_argument('-fine', action='store_true',
                     help='Flag to use a fine tuning hyper model.')
 args = parser.parse_args()
 
-logger = setup_logger('hparam_logger', log_file='logs/hparamlogs.txt')
+logger = setup_logger('hparam_logger', log_file='logs/hparamlogs.log')
 logger.info('=' * 50)
 
 set_random_seed()
 logger.info("RNG seed set")
 
 MAX_EPOCHS = 30
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 FINE_TUNING = args.fine
 logger.critical(f'{MAX_EPOCHS = }')
 logger.critical(f'{BATCH_SIZE = }')
