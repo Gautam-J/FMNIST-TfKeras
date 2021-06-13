@@ -4,4 +4,4 @@ __pycache__/
 models/*
 logs/*
 
-!logs/*.txt
+!logs/*.log

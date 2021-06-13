@@ -4,7 +4,7 @@ from tensorflow.keras.datasets import fashion_mnist
 from utils.data import set_random_seed, split_data, normalize_image
 from utils.analysis import setup_logger, get_error_pct, get_f1_score
 
-logger = setup_logger('baseline_logger', log_file='logs/baselinelogs.txt')
+logger = setup_logger('baseline_logger', log_file='logs/baselinelogs.log')
 logger.info('=' * 50)
 
 set_random_seed()

@@ -26,9 +26,9 @@ def test_setup_logger_stream(name, level):
 
 
 @pytest.mark.parametrize("name, log_file, level", [
-    ('name1', "debug_log.txt", logging.DEBUG),
-    ('name2', "info_log.txt", logging.INFO),
-    ('name3', "critical_log.txt", logging.CRITICAL)
+    ('name1', "debug_log.log", logging.DEBUG),
+    ('name2', "info_log.log", logging.INFO),
+    ('name3', "critical_log.log", logging.CRITICAL)
 ])
 def test_setup_logger_file(name, log_file, level):
     logger2 = setup_logger(
