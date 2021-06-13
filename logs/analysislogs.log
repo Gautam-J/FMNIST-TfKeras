@@ -1,0 +1,12 @@
+2021-06-13 13:22:04 INFO     ==================================================
+2021-06-13 13:22:04 INFO     RNG seed set
+2021-06-13 13:22:04 INFO     Loading data
+2021-06-13 13:22:04 INFO     Normalizing images
+2021-06-13 13:22:05 INFO     Splitting data
+2021-06-13 13:22:05 DEBUG    x_val.shape = (3000, 28, 28, 1)
+2021-06-13 13:22:05 DEBUG    y_val.shape = (3000, 1)
+2021-06-13 13:22:06 INFO     Model loaded ./logs/hparam_train/run_1623504684_5083737/best_model.h5
+2021-06-13 13:22:08 INFO     Number of validation examples: 3000
+2021-06-13 13:22:08 CRITICAL Number of wrongly classified examples: 211
+2021-06-13 13:22:08 CRITICAL model_val_error_pct = 7.0333 %
+2021-06-13 13:22:20 INFO     ==================================================
