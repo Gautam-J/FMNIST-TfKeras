@@ -26,7 +26,7 @@ logger.info('=' * 50)
 set_random_seed()
 logger.info("RNG seed set")
 
-MAX_EPOCHS = 30
+MAX_EPOCHS = 20
 BATCH_SIZE = 64
 FINE_TUNING = args.fine
 logger.critical(f'{MAX_EPOCHS = }')
@@ -67,15 +67,23 @@ ds_test = get_dataset(x_test, y_test, test=True)
 LOG_DIR = str(time.time()).replace('.', '_')
 board = get_tensorboard(LOG_DIR, FINE_TUNING)
 tuner = get_tuner(LOG_DIR, MAX_EPOCHS, FINE_TUNING)
-logger.info(f'Starting Hyperband search of {MAX_EPOCHS = }')
+
+if FINE_TUNING:
+    logger.info(f'Starting BayesianOptimization search of {MAX_EPOCHS = }')
+else:
+    logger.info(f'Starting Hyperband search of {MAX_EPOCHS = }')
 
 if FINE_TUNING:
     tuner.search(ds_train, validation_data=ds_val, batch_size=BATCH_SIZE,
-                 callbacks=[board])
+                 callbacks=[board], epochs=MAX_EPOCHS)
 else:
     tuner.search(ds_train, batch_size=BATCH_SIZE, callbacks=[board])
 
-logger.info('Hyperband search finished')
+if FINE_TUNING:
+    logger.info('BayesianOptimization search finished')
+else:
+    logger.info('Hyperband search finished')
+
 best_hp = tuner.get_best_hyperparameters()[0].values
 model = tuner.get_best_models()[0]
 

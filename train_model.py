@@ -2,7 +2,7 @@ import os
 import time
 import numpy as np
 from tensorflow.keras.datasets import fashion_mnist
-from tensorflow.keras.callbacks import TensorBoard
+from tensorflow.keras.callbacks import TensorBoard, EarlyStopping
 
 from utils.model_configs import build_train_model
 from utils.analysis import (
@@ -23,14 +23,14 @@ from utils.visualizations import (
     plot_tf_model
 )
 
-logger = setup_logger('train_logger', log_file='logs/trainlogs.txt')
+logger = setup_logger('train_logger', log_file='logs/trainlogs.log')
 logger.info('=' * 50)
 
 set_random_seed()
 logger.info("RNG seed set")
 
-EPOCHS = 2
-BATCH_SIZE = 32
+EPOCHS = 15
+BATCH_SIZE = 64
 logger.critical(f'{EPOCHS = }')
 logger.critical(f'{BATCH_SIZE = }')
 
@@ -72,6 +72,11 @@ board = TensorBoard(
     write_graph=True,
     write_images=True
 )
+es = EarlyStopping(
+    monitor='val_accuracy',
+    patience=3,
+    restore_best_weights=True
+)
 
 logger.info('Building model')
 model = build_train_model()
@@ -80,7 +85,7 @@ model.summary(print_fn=logger.debug)
 logger.info('Training started')
 model.fit(ds_train, validation_data=ds_val,
           epochs=EPOCHS, verbose=1, batch_size=BATCH_SIZE,
-          callbacks=[board])
+          callbacks=[board, es])
 logger.info('Training finished')
 
 model_train_f1_score = get_f1_score(model, x_train, y_train)
